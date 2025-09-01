@@ -1,0 +1,312 @@
+# Storage, Networking, and Databases
+
+## Storage Technology and Services Lectures
+
+### Exploring Amazon EC2 Storage
+- EC2 offers various storage options to cater to diverse needs: Amazon EBS and Amazon EFS
+- Amazon EBS (Elastic Block Store)
+	- ![Amazon EBS](images/01EBS.png)
+	- Example: A pizza oven in an EC2 kitchen which is directly attached, reliable, and used for cooking main pizzas
+	- Key Features
+		- Provides persistent block storage volumes for EC2 instances
+		- __Highly Available and Durable__
+			- Suited for EC2 instances
+			- Ensures data is preserved even if the instance crashes
+		- __Scalable__
+			- Expands on-the-fly without any downtime
+		- __Snapshot__
+			- Can take backups and also use these backups to create new volumes
+	- EBS Use Cases
+		- Hosting relational or NoSQL databases
+		- Data warehousing and big data analytics
+		- Enterprise Resource Planning (ERP) and Customer Relationship Management Applications (CRM) applications
+- Amazon EFS (Elastic File System)
+	- ![Amazon EFS](images/01EFS.png)
+	- Example: A pizza conveyer system that can serve many kitchens
+	- Key Features
+		- A scalable file storage solution for EC2 and other AWS services
+		- __Fully Managed__
+			- Removes the complexity of deploying and maintaining file systems
+		- __Automatic Scaling__
+			- Automatically scales on demand without disruption applications
+		- __Concurrent Access__
+			- Multiple EC2 instances can access an EFS system simultaneously
+	- EFS Use Cases
+		- Content management and web serving
+		- Data analytics applications
+		- Development and testing environments
+- Instance Stores
+	- ![Instance Stores](images/01temporaryStores.png)
+	- Example: A temporary prep table, where shutting down the kitchen (or terminating the instance) removes prep
+	- Key Features
+		- Offer __temporary__ block-level storage directly attached to the EC2 instance
+		- __High I/O Performance__
+			- Offers very high input/output operations per second
+		- __Temporary Storage__
+			- Data is lost if the instance is stopped or terminated
+		- __No Extra Cost__
+			- They come as part of the instance
+	- Instance Stores Use Cases
+		- Temporary storage of cache and buffers
+		- Write and discard large amounts of data
+		- Storage for applications that replicate data across multiple instances
+- __Exam Tips__
+	- Understand the difference between **EBS**, **EFS**, and **Instance Stores**
+		- EBS is a block-level storage used with EC2 instances
+		- EFS is a file system scalable across multiple EC2 instances
+		- An instance store provides temporary block-level storage directly attached to the instance
+		- Only EBS and EFS offer durable storage solutions; Instance store's data is ephemeral, meaning data doesn't persist after the instance stops or terminates
+		
+	- Know the differences in **Durability and Persistance**, **Performance**, and **Cost**
+		- While all three offer high performance,
+			- EBS is particularly known for its provisioned IOPS
+			- EFS is Scalable file storage
+			- Instance Store is for a high I/O operation suitable for temporary data
+		- While EBS and EFS have costs associated with the amount of storage provisioned, instance store comes at no additional cost as it's included in the instance price
+
+### Amazon Simple Storage Service (S3): The Bigger Picture
+- Example: S3 is like a walk-in fridgerator with data stored safely until needed, which can be accessed by any chef from any kitchen (Globally accessible)
+- S3 Components
+	- __Buckets__: The primary/unique container that contains specific ingredients/objects
+	- __Objects__: The actual data, that has metadata (labels/details attached to ingredients)
+- Benefits of S3
+	- Durability: Store data without data loss
+	- Scalability: Virtually unlimited
+	- Security: Bucket policies (to secure access to objects and buckets) with access control list (allow access to buckets and objects)
+	- Versatility: Store images, videos, backups, and big data
+- S3 Use Cases: Data Backup, Web Hosting, Content Distribution, and Data Lakes (large datasets)
+- __Exam Tips__
+	- Understand **S3** is **object storage**
+	- Understand **S3** provides **durability**, **scalability**, **security**, and **versatility**
+	- Know that each object store in S3 has **data**, a **key** (unique w/in each bucket), and **metadata**
+
+### Exploring S3 Storage Classes
+- **S3 Standard**
+	- Example: Standard shelves that suitable for frequently accessed data
+	- __High Throughput__: Can scale automatically to handle storage needs
+	- __Low Latency__
+	- Designed for durability storing data across multiple devices in multiple facilities
+- **S3 Intelligent-Tiering**
+	- Example: The dynamic shelves in a fridge
+	- Perfect for data with unpredictable access patterns
+	- __Automatically Moves Data__ (between two access tiers)
+	- __Savings__: Designed for savings in storage costs w/out performance impact
+- **S3 Standard-Infrequent Access**
+	- Example: The pantry
+	- Designed for data that's __less frequently accessed__, but requires __rapid access__ when needed
+	- Has a retrieval fee, so best for data accessed less frequency, but quickly when needed
+- **S3 One Zone-Infrequent Access**
+	- Example: Special section of fridge
+	- __One AZ__: Stores data is just one availability zone
+	- __Cost Effective__: But slightly less durable than multiple zone options
+	- Suitable for secondary backup or data that's easily reproducible
+- **S3 Glacier Instant Retrieval**-
+	- Example: The top drawer in freezer
+	- __Archive Storage__: Quickly access important ingredients, but ones that aren't used often
+	- __Instant Retrieval__: Delivering the fastest access to archive storage
+- **S3 Glacier Flexible Retrieval**
+	- Example: A compartment in deep freezer that isn't accessed as much
+	- __Archive Storage__: For archived data that's accessed 1-2 times per year
+	- __Not Immediate__: Retrieves large sets of data at no cost
+- **S3 Glacier Deep Archive**
+	- Example: Bottom part of deep freezer
+	- __Archive Storage__: Designed for customers, particularly those in highly regulated industries (healthcare), that retain data from 5-7 years to meet regulatory compliance
+	- __Most Cost Effective__
+	- __Slow__: Long retrieval times that can take up to 12 hours
+- __Exam Tips__
+	- Understand the differece of **retrieval times** and **fee differences** between classes
+	- Know if there is one or more **availability zones** for data storage
+	- Recognize in what case a storage class would be used
+	- [S3 Storage Classes](https://aws.amazon.com/s3/storage-classes/)
+
+### Demo: Exploring Storage Services: S3 in Action
+
+### Lab: Creating S3 Buckets with Versioning and Encryption
+
+### Additional Storage Services
+- **FSx**
+	- Example: Pizza shelf with specific conditions (Gluten-free, Vegan, Keto)
+	- Offers a __Fully Managed Windows File System__ that's crafted for __Window Specific Workloads__
+	- __Built on Windows Server__
+- **Elastic Disaster Recovery**
+	- Example: Backup generator for pizza kitchen to ensure it continues and remains operational
+	- __Minimize Downtime & Data Loss__
+	- __Quick Recovery Times__
+	- __Cost-Effective Solution__: Pay only for the servers you're actively replicating to AWS
+	- __Maintains Business Continuity__
+	- __Protects from Data Disruptions__
+	- __Flexible and Adaptable__
+- __Exam Tips__
+	- Understand **FSx** is for Windows
+	- Understand **Elastic Disaster Recovery** is about swift recovery and minimizing disruptions
+	- Know FSx offers seamless integration
+	- Know Elastic Disaster Recovery is cost effective
+
+### Amazon Elastic Block Store (EBS)
+- EBS Key Features 
+	- Example: Main pizza oven in the EC2 kitchen
+	- __Persistent Storage__: Data remains intact after stopping EC2 instance
+	- __Highly Available and Durable__: Data is automatically replicated w/in its availability zone
+	- __Scalable__: Volume can be resized as data grows
+	- __Encrypted__: Data at rest an in transit is secure
+	- __Snapshot__: Can take backups and also use these backups to create new volume
+- EBS Volume Types
+	- **SSD-backed volume (Solid State Drive)**
+		- Optimized for transactional workloads involving frequent read/write operations w/ small input/output size, but needs to have those operations happen quickly
+		- __Solid State Drive, Faster, More Expensive, Ideal for High IOPS__
+			- IOPS refers to the number of read/write operations per second
+	- **HDD-backed volumes (Hard Disk Drive)**
+		- Optimized for large streaming workloads where the amount of data transferred to and from a storage device happens quickly
+		- __Hard Disk Drive, Slower, Less Expensive, Ideal for Throughput Tasks__
+			- Throughput is a measurement of bits/bytes per second that can be processed by a storage device
+- SSD Types
+	- General Purpose SSD
+		- gp3, gp2
+		- Low-latency interactive applications
+		- 16,000 Max IOPS
+		- Multi-attach not supported
+	- Provisioned IOPS SSD
+		- io2, io1, io2 block express
+		- High IOPS: Given to support workloads sustained IOPS performance or sub-millisecond latency
+		- 64,000 Max IOPS (io1/io2), 256,000 Max IOPS(i02 block express)
+		- __Multi-attached supported__: Attaches a single provisioned IOPS SSD volume to multiple instances that are in the same availability zone
+- HDD Types
+	- Throughput Optimized HDD Volumes
+		- st1: Big data, data warehouses, and log processing
+		- Big Data
+		- 500 Max IOPS *Higher*
+		- 500 MiB/s max throughput
+	- Cold HDD Volumes
+		- sc1: throughput-oriented storage for data that is infrequently accessed
+		- Lowest storage cost
+		- 250 Max IOPS
+		- 250 MiB/s max throughput
+	- EBS Multi-attached is not supported for the HDD-type volumes
+- Snapshots
+	- Incremental Backups: Each snapshot only saves changes since the last one
+	- Restore & Launch: Use snapshots to quickly restore a volume
+	- Share or Sell: Snapshots can be shared with other AWS accounts
+	- Cost-Effective: Snapshots only store block-level changes
+	- Cross-region Replication: Snapshots can be copied across AWS regions --> flexibility and enhancing recovery
+- __Exam Tips__
+	- Understand **EBS is persistent block-level storage for EC2**
+	- Understand when you might want to use SSD versus HDD-backed volumes
+		- **SSD = High IOPS**
+		- **HDD = Throughput**
+	- Know the importance of EBS snapshots for data recovery
+	- [Amazon EBS Volume Types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html)
+
+### AWS Storage Gateway
+- Example: A delivery scooter transporting ingredients from local storage to AWS cloud kitchen
+- **Storage Gateway** connects your on-site data storage with AWS's cloud services
+- Key Benefits
+	- __Cost-Effective__: Reduces on-premises storage infrastructure
+	- __Secure__: Data encryption for safe transfer and storage
+	- __Seamelss Integration__: Integrates w/ existing applications
+- Use Cases
+	- Data Backup: off-site backup for important data
+	- Disaster Recovery: Recovering data from cloud if something goes wrong in the site
+	- Data Processing in AWS: Insights to local servers
+- Types
+	- **S3 File Gateway**: Use for storing filies in S3 to keep your data in cloud-native formats
+	- **Volume Gateway**: Provides block storage volumes based with S3. Offers __stored__ (entire data sets) and __cached__ (frequently accessed data) volumes
+	- Tape Gateway: For achiving data, not used for every day but long-term attention
+	- **FSx File Gateway**: Extends on-premises file systems for Windows file server on AWS cloud
+- __Exam Tips__
+	- Understand **storage gateway** is a **hybrid storage service**
+		- The types are **S3 Files**, **FSx File**, **Volume**, and **Tape** Gateways
+	- Know that storage gateway is **cost-effective**, **secure**, and offers **seamless integration**
+		- Use cases are **data backup**, **disaster recovery**, and **data processing** in AWS
+
+### Overview of AWS Backup
+- AWS Backup
+	- Example: A recipe book; If something goes wrong, can refer to recipe book/backup to create the pizza/data
+	- Carefully copies and stores data
+	- A comprehensive service designed to manage backups acoss various AWS services ensuring data is stored and easily retrievable
+- AWS Resources
+	- Elastic Compute Cloud Instances
+	- Elastic Block Store Volumes
+	- Relational Database Service Databases
+	- DynamoDB tables
+	- Elastic File System File Systems
+	- FSx File Systems
+	- Storage Gateway Volumes
+- Core Features
+	- __Centralized Backup Management__: Simplifies overseeing backups across AWS
+	- __Automated Backup Scheduling__: Provides policies you define
+	- __Encryption & Compliance__: Keeps data secure
+	- __Cross-Region & Account Backup__: Enhances disaster recovery
+- Use Cases
+	- Cloud-Native Backup: Ideal for protecing AWS workloads ensuring your cloud-based data is backed-up and recoverable
+	- Hybrid Data Protection: Seamless backup solutions for both on-premises and cloud data
+	- Data Protection Compliance
+- Recovery
+	- If data is corrupt or lost, allows for recovery --> minimal downtime and maximum data integrity
+- __Exam Tips__
+	- Understand AWS Backup offers **automatd** & **centralized** data protection. It integrates with various **AWS services**
+	- Know AWS Backup provides **security & compliance**
+	- Know **recovery process** allows you to restore
+
+### Storage Exam Tips
+- EC2 Storage Options
+	- Elastic Block Storage
+		- Provides persistent block storage
+		- Snapshots/backups to create new volumes
+	- Elastic File System (conveyor to serve many kitchens)
+		- Scales on demand w/out disruption applications
+	- Instance Stores (temp. prep table)
+		- Data is lost if the instance is stopped or terminated
+- Amazon S3 (Giant walk-in refridgerator)
+	- High Durability
+	- High Scalability (virutally unlimited)
+	- Security
+		- Bucket policies
+		- Access control lists
+	- Versioning: Keep multiple versions of an object 
+	- Life Cycle Policies: Set rules that define actions to be taken on a group of objects
+- S3 Storage Classes
+	- S3 Standard (Frequent access)
+		- High Throughput
+		- Low Latency
+	- S3 Intelligent-Tiering (Unpredictable access patterns)
+		- Moves Data Automatically
+	- S3 Standard-Infrequent Access
+		- Accessed Less frequently
+		- Rapid Access (when needed)
+	- S3 One Zone-Infrequent Access
+		- One AZ (Availability Zone)
+		- Cost Effective
+		- Less durable
+	- S3 Glacier Instant Retrieval (Less frequent)
+		- Archival Storage
+		- Instant Retrieval
+	- S3 Glacier Flexible Retrieval (not accessed as much)
+		- Infrequent archival storage
+		- Slower Retrieval
+	- S3 Glacier Deep Archive (long-term archival)
+		- Long-term storage
+		- Slowest retrieval times
+- Additional Storage Services
+	- FSx (Specific condition: Windows)
+		- Fully Managed Windows
+		- Supports Windows workloads
+		- Built on Windows SErvers
+	- Elastic Disaster Recovery
+		- Maintain Business Continuity
+		- Protects from Data Disruptions
+		- Flexible and Adaptable
+- Amazon EBS Volume Types
+	- SSD (High IOPS)
+		- Solid State Drive, Faster, More Expensive, Ideal for high IOPS, General Purpose SSD / Provisioned IOPS SSD
+	- HDD (Throughput)
+		- Hard Disk Drive, Slower, Less Expensive, Ideal for Throughput tasks, Throughput Optimized HDD volumes / Cold HDD volumes
+- AWS Storage Gateway
+	- S3 File Gateway: Keep your data in cloud-native formats
+	- Tape Gateway: For archiving data
+	- Volume Gateway: Provides block storage volume and offers stores/cached volumes
+	- FSx File Gateway: Extends on-premises file systems
+- AWS Backup
+	- Centralized Backup Management: Simplifies overseeing backups
+	- Encryption & Compliance: Keeps data secure
+	- Automated Backup Scheduling: Provides policies you define
+	- Cross-Region & Account Backup: Enhances disaster recovery
