@@ -1,0 +1,32 @@
+# Demo: EC2
+
+- Action: Navigate to Console Home --> EC2 (Recently Visited) --> Launch Instance
+	- Name: test_instance
+- Instance Types: Choose one to fit one's business needs
+- Key Pair (login): Allows you to connect to instance from anywhere in the world
+	- Example: Create key pair: test_instance_key
+	- This then automatically downloads to your machine
+		- As long as this key is available on your local machine, the instance can be accessed
+- Network Settings
+	- VPC ID: Where the instance will be launched in
+	- Subnet
+		- No preference: means that it will give any public subnet, because there is auto-assigned public IP
+		- Upon the launch of the instance, it will give a public IP that will be used to set to see if we can reach any application that we launched on an instance
+	- Firewall
+		- Example: Allow SSH traffic
+		- Example: Allow HTTP traffic --> Allows connection through the internet
+		- Options: Anywere, Custom, MyIP --> Determines where it's allowed from
+- **Configure Storage**: Used to configure the volume that's attached to the instance or add a new volume as well
+	- **Storage Volume**: A disk that collects info from the instance, which can be conneted to new instances
+		- If installing an application, then it would transfer to a new instance as well, and would have the exact same setup 
+- Advanced settings:
+	- **User Data**: Can create/install a script here and it will run as root user to install any packages, dependencies, and application that we wish to install on the machine
+- Action: Launch Instance and click on instance ID located after "Successfully initiated launch of instance: "
+	- Action: Connect to instance to install an apache web server
+	- Action: Connect using EC2 Instance Connect
+		- Other options to connect: SSH clinet, EC2 serial console, Session Manager
+- Action: In console, sudo yum -y update
+	- Action: sudo yum install httpd -y (installs apache)
+	- Action: sudo systemctl start httpd (start apache)
+	- Action: sudo systemctl enable httpd 
+	- Action: sudo systemctl status httpd (see status)

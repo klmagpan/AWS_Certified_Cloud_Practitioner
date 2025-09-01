@@ -1,0 +1,25 @@
+# Demo: Working with RDS for Data Replication
+
+- Action: In console home, navigate to Aurora and RDS
+- Amazon RDS Dashboard includes: Databases, Query Editor, Performance Insights, Exports in Amazon S3, and Automated Backups, etc.
+- Action: Navigate to Databases --> Create a database --> Easy Create --> MySQL
+	- DB Instance Size: Free Tier
+	- Identifier: my-database
+	- Master username: Used when want to log into database
+- Set up EC2 Connection (optional): Sets up an EC2 compute resource to log onto database
+- Default Settings
+	- Default VPC: What's going to be launched in
+	- Subnet Group: Creates a new database subnet group
+	- Automatic Backup: Used to recover time objective
+- Action: Create Database
+	- Action: Quick Actions: Convert to Multi-AZ development
+- Action: Create *read replica*
+	- Offloads the read requests from the original database, do that it's not overloaded
+	- Identifier: my-database-read
+	- Instance Configuration: *Burstable Classes*
+		- Instances that give you a steady baseline amount of computing power, but could potentially burst to a higher level if application needs more power
+- **Read replica** can be promoted to a primary instance, anytime the primary instance goes down
+- Enable Auto Minor Version: Automatically upgrade to new minor versions as they release
+- Quick Actions
+	- Restore from S3: Taking a database backup file stored in Amazon S3 and use it to create a new database instance
+		- Used to recover or migrate databases
