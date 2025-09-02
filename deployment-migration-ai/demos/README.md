@@ -1,4 +1,4 @@
-# AWS Certified Cloud Practitioner (CLF-CO2): Cloud Foundations and Compute Demos
+# AWS Certified Cloud Practitioner (CLF-CO2): Deployment, Migration, and AI
 
 ## Demo Overview
 
