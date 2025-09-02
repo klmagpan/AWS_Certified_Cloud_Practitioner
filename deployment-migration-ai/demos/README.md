@@ -38,20 +38,22 @@
 ### Demo: Using Athena to Query Data
 - Section 03 - Artificial Intelligence, Machine Learning, and Analytic Technology and Services
 - Files
-	- 
+	- athena.md
+	- Athena_Query.txt
+	- Athena_Query_Create_Table.txt
 
 ### Demo: Using Amazon Polly
 - Section 03 - Artificial Intelligence, Machine Learning, and Analytic Technology and Services
 - Files
-	- 
+	- polly.md
 
 ### Demo: Using Amazon Transcribe
 - Section 03 - Artificial Intelligence, Machine Learning, and Analytic Technology and Services
 - Files
-	- 
+	- transcribe.md
 
 ### Demo: Amazon Rekognition in Action
 - Section 03 - Artificial Intelligence, Machine Learning, and Analytic Technology and Services
 - Files
-	- 
+	- rekognition.md
 	
