@@ -17,12 +17,13 @@
 ### Lab: Create and Subscribe to an AWS SNS Topic
 - Section 01: Development, Messaging, and Deployment Technology and Services
 - Files
-	- ...
+	- sns.md
 
 ### Lab: Create a DynamoDB Table Using CloudFormation
 - Section 01: Development, Messaging, and Deployment Technology and Services
 - Files
-	- ...
+	- acg-dynamodb-template.yaml
+	- dynamoDB.md
 
 ### Demo: Deploying an Application Using Elastic Beanstalk
 - Section 01: Development, Messaging, and Deployment Technology and Services
