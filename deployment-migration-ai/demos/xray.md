@@ -21,5 +21,5 @@
 	- In the case where it's "10s" instead of "ms", then that is an indication that the application is overloaded or doesn't ahve enough capacity --> performance issue
 
 4. Exam Tips:
-	- The X-Ray service map provides an end-to-end view of requests as they travel through your application
+	- The **X-Ray service map** provides an end-to-end view of requests as they travel through your application
 	- This information can be used to troubleshoot connectivity and performance issues
